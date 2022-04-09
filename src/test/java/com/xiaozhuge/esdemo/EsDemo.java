@@ -28,10 +28,8 @@ public class EsDemo {
     RestHighLevelClient esClient = EsClientUtil.getEsClient();
 
     public static void main(String[] args) throws Exception {
-        EsIndexService indexService = new EsIndexService();
-        //indexService.createIndex("hcuser");
-
         EsDocumentService service = new EsDocumentService();
+        //indexService.createIndex("hcuser");
         User user = new User();
         user.setName("测试1");
         user.setPassword("123");
@@ -46,45 +44,28 @@ public class EsDemo {
 
         //service.batchCreate("hcuser");
 
-        service.batchDelete("hcuser");
+        //service.batchDelete("hcuser");
+
+//        service.batchCreate("hcuser");
+
+//        service.matchAllQuery("hcuser");
+
+        //service.termQuery("hcuser");
+
+//        service.highLevelQuery("hcuser");
+
+//        service.multiQuery("shopping");
+
+//        service.rangeQuery("shopping");
+
+//        service.fuzzyQuery("shopping");
+
+//        service.highLightQuery("shopping");
+
+//        service.aggrQuery("shopping");
+
+        service.groupQuery("shopping");
 
     }
-
-    /**
-     * 创建索引
-     * @param indexName
-     * @throws Exception
-     */
-    public void createIndex(String indexName) throws Exception{
-        CreateIndexRequest goodsIndex = new CreateIndexRequest(indexName);
-        CreateIndexResponse response = esClient.indices().create(goodsIndex, RequestOptions.DEFAULT);
-        boolean acknowledged = response.isAcknowledged();
-        System.out.println("索引创建结果：" + acknowledged);
-    }
-
-    /**
-     * 查询索引信息
-     * @param indexName
-     * @throws Exception
-     */
-    public void queryIndex(String indexName) throws Exception{
-        GetIndexRequest getIndexRequest = new GetIndexRequest(indexName);
-        GetIndexResponse response = esClient.indices().get(getIndexRequest, RequestOptions.DEFAULT);
-        System.out.println(response.getAliases());
-        System.out.println(response.getMappings());
-        System.out.println(response.getSettings());
-    }
-
-    /**
-     * 删除索引
-     * @param indexName
-     * @throws Exception
-     */
-    public void deleteIndex(String indexName) throws Exception{
-        DeleteIndexRequest deleteIndexRequest = new DeleteIndexRequest(indexName);
-        AcknowledgedResponse response = esClient.indices().delete(deleteIndexRequest, RequestOptions.DEFAULT);
-        System.out.println("索引删除结果：" + response.isAcknowledged());
-    }
-
-
+    
 }
